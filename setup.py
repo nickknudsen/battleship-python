@@ -100,9 +100,7 @@ setup(
     license='MIT',
     long_description=long_description,
     name='py-battleship',
-    packages=find_packages(exclude=['docs', 'tests', 'tests.*', 'requirements']),
-    setup_requires=['pytest-runner'],
-    tests_require=tests_requirements,
+    packages=find_packages(),
     url='https://github.com/rhenter/battleship-python',
     version=version,
 )

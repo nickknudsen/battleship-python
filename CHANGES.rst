@@ -1,6 +1,12 @@
 Changelog
 ---------
 
+0.3.1
+-----
+
+* Add locale folder to Manifest.in
+
+
 0.3.0
 -----
 

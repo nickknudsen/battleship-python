@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-01 19:38-0200\n"
+"POT-Creation-Date: 2019-01-01 20:28-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgstr ""
 "\n"
 "Coordenada: "
 
-#: battleship/main.py:129
+#: battleship/main.py:129 battleship/main.py:128
 msgid ""
 "\n"
 "\n"
@@ -78,3 +78,35 @@ msgstr ""
 "\n"
 "\n"
 "\t\t\tVocê só pode usar letras com numeros. Ex: a1, c10, etc..."
+
+#: battleship/battleship.py:74
+msgid "carrier"
+msgstr "porta aviões"
+
+#: battleship/battleship.py:75
+msgid "battleship"
+msgstr "encouraçado"
+
+#: battleship/battleship.py:76
+msgid "cruiser"
+msgstr "cruzador"
+
+#: battleship/battleship.py:77
+msgid "destroyer"
+msgstr "destroyer"
+
+#: battleship/battleship.py:78
+msgid "submarine"
+msgstr "submarino"
+
+#: battleship/battleship.py:79
+msgid "frigate"
+msgstr "fragata"
+
+#: battleship/main.py:93
+msgid "yes"
+msgstr ""
+
+#: battleship/main.py:93
+msgid "no"
+msgstr ""

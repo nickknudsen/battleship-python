@@ -49,7 +49,7 @@ def print_board(game):
     for ship in game.ships:
         text = _('<{}> \t Initials: {} \t| Size: {} \t| Hits: {} | sunk: {}')
         print(text.format(
-            ship.name.title(),
+            _(ship.name.title()),
             ship.initials,
             ship.length,
             ship.hits,
@@ -90,7 +90,7 @@ def print_status(game):
     for s in game.ships:
         print('<{}> \t Sunk: {} \t| Hits: {}'.format(
             s.name.title(),
-            'yes' if s.sink else 'no',
+            _('yes') if s.sink else _('no'),
             s.hits
         ))
 

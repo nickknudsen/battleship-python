@@ -7,11 +7,14 @@ from .battleship import Game, Board, Ship  # noqa
 from .version import __version__  # noqa
 
 
-BASE_DIR = Path(__file__).absolute().parents[1]
+BASE_DIR = Path(__file__).parent
 LOCALE_DIR = BASE_DIR / "locale"
 
-language = gettext.translation('battleship', localedir=str(LOCALE_DIR), languages=['pt_BR', 'en'])
-language.install()
+if LOCALE_DIR.exists():
+    language = gettext.translation('battleship', localedir=str(LOCALE_DIR), languages=['en', 'pt_BR'])
+    language.install()
+else:
+    language = gettext
 
 
-__all__ = ['Game', 'Board', 'Ship', '__version__', 'language', 'BASE_DIR']
+__all__ = ['Game', 'Board', 'Ship', '__version__', 'BASE_DIR']
