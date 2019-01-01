@@ -186,6 +186,8 @@ class Game:
         self.start_time = datetime.now()
         self.shots = 50
         self.points = 0
+        self.lost_shot = 0
+        self.right_shot = 0
 
         board = Board()
         board.build_fleet()
@@ -206,8 +208,10 @@ class Game:
             hit, ship = self.board.shot(x, y)
 
             if not hit:
+                self.lost_shot += 1
                 return False, None
 
+            self.right_shot += 1
             self.points += ship.points
 
             if self.board.is_finished() or self.shots == 0:

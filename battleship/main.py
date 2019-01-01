@@ -1,4 +1,5 @@
 import os
+import sys
 from string import ascii_lowercase
 
 from .battleship import Game
@@ -71,19 +72,22 @@ def print_ship_hit(ship_hit, points, shots, time_elapsed):
     input("Press Enter to continue...")
 
 
-def print_status(board, points, shots, time_elapsed):
+def print_status(game):
     os.system('clear')
-    print('\nPoints: ', points, end="     ")
-    print('Shots Available: ', shots, end="     ")
-    print('Time elapsed: {} sec'.format(int(time_elapsed)), end="\n")
+    print('\nPoints: ', game.points, end="     ")
+    print('Lost Shots: ', game.lost_shot, end="     ")
+    print('Right Shots: ', game.lost_shot, end="     ")
+    print('Shots Missing: ', game.shots, end="\n")
     print('-' * 90)
-    print('Sunken Ships: ', board.sunken_ships, end="     ")
-    print('Missing Ships: ', board.total_ships - board.sunken_ships, end="\n")
+    print('Sunken Ships: ', game.board.sunken_ships, end="     ")
+    print('Missing Ships: ', game.board.total_ships - game.board.sunken_ships, end="   ")
+    print('Time elapsed: {} sec'.format(int(game.time_elapsed)), end="\n")
     print('-' * 90)
-    for s in board.ships:
-        print('{}: sunk: {} \t|'.format(
+    for s in game.board.ships:
+        print('<{}> \t Sunk: {} \t| Hits: {}'.format(
             s.name.title(),
             'yes' if s.sink else 'no',
+            s.hits
         ))
 
     print('-' * 90)
@@ -92,12 +96,14 @@ def print_status(board, points, shots, time_elapsed):
 def main():
     game = Game()
     print_board(game.board, game.points, game.shots, game.time_elapsed)
+
     while True:
         while True:
             try:
+                print('Press CTRL+C to exit ...')
                 result = input('Choose your coordinates. Ex: a1, b15: c10 \n\nCoordinates: ').strip()
 
-                x = int(LETTERS[result[0]])
+                x = int(LETTERS[result[0].lower()])
                 y = int(result[1:].strip())
 
                 if (x > 16 and x < 0) or (y > 16 and y < 0):
@@ -107,18 +113,19 @@ def main():
                 if is_valid:
                     print_ship_hit(ship, game.points, game.shots, game.time_elapsed)
                     break
+
                 print_board(game.board, game.points, game.shots, game.time_elapsed)
+
+                if game.end_game():
+                    sys.exit(print_status(game))
+
             except Exception as exc:
                 os.system('clear')
                 print(str(exc))
                 input('\n\n\n\t\t\tYou can only use letters and numbers. Ex: a1, c10, etc...')
                 print_board(game.board, game.points, game.shots, game.time_elapsed)
+            except KeyboardInterrupt:
+                sys.exit(print_status(game))
 
         print_board(game.board, game.points, game.shots, game.time_elapsed)
-        if game.end_game():
-            break
 
-    print_status(game.board, game.points, game.shots, game.time_elapsed)
-
-
-main()
