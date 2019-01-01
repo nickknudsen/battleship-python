@@ -2,6 +2,8 @@ from datetime import datetime
 import random
 from copy import deepcopy
 
+from .exceptions import InvalidPosition
+
 
 class Ship:
     def __init__(self, name, length, points, initials):
@@ -14,15 +16,41 @@ class Ship:
         self.points = points
 
     @property
+    def hits(self):
+        return len([x['hit'] for x in self.hit_positions if x['hit']])
+
+    @property
+    def is_destroyed(self):
+        results = []
+        for position in self.hit_positions:
+            results.append(
+                position['hit']
+            )
+        return all(results)
+
+    @property
     def positions(self):
         return len(self.hit_positions)
 
     def add_location(self, x, y, hit):
+        if len(self.hit_positions) + 1 > self.length:
+            text = 'Ship has more hit positions {} than Lenght: {}'.format(
+                len(self.hit_positions) + 1,
+                self.length
+            )
+            raise InvalidPosition(text)
+
         self.hit_positions.append({
             'x': x,
             'y': y,
             'hit': hit
         })
+
+    def hit(self, x, y):
+        for position in self.hit_positions:
+            if position['x'] == x and position['y'] == y:
+                position.update(hit=True)
+        return True
 
     def __str__(self):
         return self.name.title()
@@ -99,21 +127,12 @@ class Board:
 
         return True
 
-    def _is_destoyed(self, ship):
-        results = []
-        for position in ship.hit_positions:
-            results.append(
-                self.matrix[position['x']][position['y']]['shooted']
-            )
-        return all(results)
-
     def is_finished(self):
         results = []
         for ship in self.ships:
-            for position in ship.hit_positions:
-                results.append(
-                    self.matrix[position['x']][position['y']]['shooted']
-                )
+            results.append(
+                ship.is_destroyed
+            )
         return all(results)
 
     def _remove_ship(self, ship):
@@ -121,10 +140,11 @@ class Board:
             self.matrix[position['x']][position['y']] = deepcopy(self.DEFAULT_VALUE)
 
     def add_ship(self, ship):
-        if not self._add_ship(ship):
+        added = self._add_ship(ship)
+        if not added:
             self._remove_ship(ship)
             return self.add_ship(ship)
-        return self._add_ship(ship)
+        return added
 
     def build_fleet(self):
         for ship in self.ships:
@@ -143,19 +163,22 @@ class Board:
         if position['shooted']:
             return False, None
 
-        position['shooted'] = True
+        position.update(shooted=True)
         if not position['ship']:
             self.matrix[x][y] = position
             return False, None
 
         self.total_hits += 1
+        ship = position['ship']
+        ship.hit(x, y)
 
-        if self._is_destoyed(position['ship']):
+        if ship.is_destroyed:
             self.sunken_ships += 1
-            position['ship'].sink = True
+            ship.sink = True
 
+        position.update(ship=ship)
         self.matrix[x][y] = position
-        return True, position['ship']
+        return True, ship
 
 
 class Game:
@@ -188,7 +211,7 @@ class Game:
             self.points += ship.points
 
             if self.board.is_finished() or self.shots == 0:
-                raise Exception('Acabou')
+                raise Exception('Finish')
 
             return True, ship
 
