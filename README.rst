@@ -89,9 +89,9 @@ Please send pull requests, very much appriciated.
 
 
 
-.. |PyPI Version| image:: https://img.shields.io/pypi/pyversions/py-battleship.svg?maxAge=2592000
+.. |PyPI Version| image:: https://img.shields.io/pypi/pyversions/py-battleship.svg?maxAge=360
    :target: https://pypi.python.org/pypi/py-battleship
-.. |PyPI License| image:: https://img.shields.io/pypi/l/py-battleship.svg?maxAge=2592000
+.. |PyPI License| image:: https://img.shields.io/pypi/l/py-battleship.svg?maxAge=360
    :target: https://github.com/rhenter/battleship-python/blob/master/LICENSE
 .. |PyPI latest| image:: https://img.shields.io/pypi/v/py-battleship.svg?maxAge=360
    :target: https://pypi.python.org/pypi/py-battleship
