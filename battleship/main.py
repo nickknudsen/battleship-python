@@ -125,12 +125,9 @@ def main():
 
             except Exception as exc:
                 os.system('clear')
-                print(str(exc))
                 input(_('\n\n\n\t\t\tYou can only use letters with numbers. Ex: a1, c10, etc...'))
                 print_board(game)
             except KeyboardInterrupt:
                 sys.exit(print_status(game))
 
         print_board(game)
-
-main()
