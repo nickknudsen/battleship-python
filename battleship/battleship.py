@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# encoding: utf-8
 from datetime import datetime
 import random
 from copy import deepcopy
@@ -47,10 +49,9 @@ class Ship:
         })
 
     def hit(self, x, y):
-        for position in self.hit_positions:
-            if position['x'] == x and position['y'] == y:
-                position.update(hit=True)
-        return True
+        for pos in self.hit_positions:
+            if (x, y) == (pos['x'], pos['y']):
+                pos['hit'] = True
 
     def __str__(self):
         return self.name.title()
@@ -158,7 +159,7 @@ class Board:
         return self.matrix[x][y] == deepcopy(self.DEFAULT_VALUE)
 
     def shot(self, x, y):
-        position = deepcopy(self.matrix[x][y])
+        position = self.matrix[x][y].copy()
 
         if position['shooted']:
             return False, None
@@ -168,30 +169,28 @@ class Board:
             self.matrix[x][y] = position
             return False, None
 
+        position['ship'].hit(x, y)
+
         self.total_hits += 1
-        ship = position['ship']
-        ship.hit(x, y)
-
-        if ship.is_destroyed:
+        if position['ship'].is_destroyed:
             self.sunken_ships += 1
-            ship.sink = True
+            position['ship'].sink = True
 
-        position.update(ship=ship)
         self.matrix[x][y] = position
-        return True, ship
+        return True, position['ship']
 
 
-class Game:
+class Game(Board):
     def __init__(self):
+        super().__init__()
         self.start_time = datetime.now()
         self.shots = 50
         self.points = 0
         self.lost_shot = 0
         self.right_shot = 0
 
-        board = Board()
-        board.build_fleet()
-        self.board = board
+        # Building Fleet
+        self.build_fleet()
 
     @property
     def time_elapsed(self):
@@ -200,12 +199,12 @@ class Game:
 
     def play(self, x, y):
 
-        if self.board.matrix[x][y]['shooted']:
+        if self.matrix[x][y]['shooted']:
             return False, None
         else:
             self.shots -= 1
 
-            hit, ship = self.board.shot(x, y)
+            hit, ship = self.shot(x, y)
 
             if not hit:
                 self.lost_shot += 1
@@ -214,12 +213,12 @@ class Game:
             self.right_shot += 1
             self.points += ship.points
 
-            if self.board.is_finished() or self.shots == 0:
+            if self.is_finished() or self.shots == 0:
                 raise Exception('Finish')
 
             return True, ship
 
     def end_game(self):
-        if self.board.is_finished() or self.shots == 0:
+        if self.is_finished() or self.shots == 0:
             return True
         return False
