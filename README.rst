@@ -67,7 +67,7 @@ To play use `py-battleship` or `python -m battlefield`
     ------------------------------------------------------------------------------------------
     Choose your coordinates. Ex: a1, b15: c10
 
-    Coordinates:
+    Coordinates: q10
 
 Documentation
 -------------
@@ -78,7 +78,7 @@ Documentation
 Contributing
 ------------
 
-Please send pull requests, very much appriciated.
+Please send pull requests, very much appreciated.
 
 
 1. Fork the `repository <https://github.com/rhenter/battleship-python>`_ on GitHub.
