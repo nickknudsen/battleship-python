@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.3.2
+-----
+
+* Fix locale file 
+
 0.3.1
 -----
 
