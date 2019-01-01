@@ -57,12 +57,12 @@ To play use `py-battleship` or `python -m battlefield`
     ------------------------------------------------------------------------------------------
     Labels
     -------
-    <Carrier> 	 length: 5 	| initials: CA 	| Hits: 0 | sunk: no
-    <Battleship> 	 length: 4 	| initials: BT 	| Hits: 0 | sunk: no
-    <Cruiser> 	 length: 3 	| initials: CR 	| Hits: 0 | sunk: no
-    <Destroyer> 	 length: 3 	| initials: DT 	| Hits: 0 | sunk: no
-    <Submarine> 	 length: 2 	| initials: SB 	| Hits: 0 | sunk: no
-    <Frigate> 	 length: 2 	| initials: FR 	| Hits: 0 | sunk: no
+    <Carrier>    length: 5  | initials: CA  | Hits: 0 | sunk: no
+    <Battleship> length: 4  | initials: BT  | Hits: 0 | sunk: no
+    <Cruiser>    length: 3  | initials: CR  | Hits: 0 | sunk: no
+    <Destroyer>  length: 3  | initials: DT  | Hits: 0 | sunk: no
+    <Submarine>  length: 2  | initials: SB  | Hits: 0 | sunk: no
+    <Frigate>    length: 2  | initials: FR  | Hits: 0 | sunk: no
 
     ------------------------------------------------------------------------------------------
     Choose your coordinates. Ex: a1, b15: c10
