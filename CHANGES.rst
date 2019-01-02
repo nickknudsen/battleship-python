@@ -1,11 +1,15 @@
 Changelog
 ---------
 
+0.3.6
+-----
+
+* Update readme
+
 0.3.5
 -----
 
 * Use vertical label in upper case
-
 
 0.3.4
 -----
