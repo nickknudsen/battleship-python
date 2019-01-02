@@ -28,26 +28,26 @@ def print_board(game):
     print_statistics(game)
 
     # Table Header
-    print('| ', end='')
-    print('{:<3}'.format('-'), end='')
+    print('|', end='')
+    print('{:^3}'.format('-'), end='|')
     for i in range(game.COLS):
-        print('| ', end='')
-        print('{:<3}'.format(i), end='')
-    print('| ', end='\n')
+        print('{:^4}'.format(i), end='|')
+
+    print()
     print(dash)
 
     # Table Body
     for i, row in enumerate(game.matrix):
-        print('| ', end='')
-        print('{:<2}'.format(NUMBERS[i].upper()), end=" | ")
+        print('|', end='')
+        print('{:^3}'.format(NUMBERS[i].upper()), end="|")
         for col in row:
             if col['shooted']:
                 if not col['ship']:
-                    print('{:<2}'.format('O'), end=" | ")
+                    print('{:^4}'.format('O'), end="|")
                 else:
-                    print('{:<2}'.format(col['ship'].initials), end=" | ")
+                    print('{:^4}'.format(col['ship'].initials), end="|")
             else:
-                print('{:<2}'.format('.'), end=" | ")
+                print('{:^4}'.format('.'), end="|")
 
         print()
 

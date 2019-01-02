@@ -1,5 +1,9 @@
 Changelog
 ---------
+0.3.10
+------
+
+* Fix table layout
 
 0.3.9
 -----
