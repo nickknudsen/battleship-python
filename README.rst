@@ -19,6 +19,8 @@ Or, you can download the source and
 
 .. code-block:: bash
 
+   $ git clone git@github.com:rhenter/battleship-python.git
+   $ cd battleship-python
    $ python setup.py install
 
 Add sudo in the beginning if you met problem.
@@ -27,7 +29,7 @@ Add sudo in the beginning if you met problem.
 How to Use
 ----------
 
-To play use `py-battleship` or `python -m battlefield`
+To play use py-battleship or `python -m battlefield`
 
 .. code-block:: bash
 
