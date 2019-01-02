@@ -73,6 +73,7 @@ To play use py-battleship or python -m battlefield
 
     Coordinates: f5
 
+
 Documentation
 -------------
 
