@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-0.3.8
+0.3.9
 -----
 
 * Refactor Main: Remove unnecessary code
