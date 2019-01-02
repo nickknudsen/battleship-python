@@ -110,7 +110,8 @@ def main():
         while True:
             try:
                 print(_('Press CTRL+C to exit ...'))
-                result = input(_('Choose your coordinates. Ex: a1, b15: c10 \n\nCoordinates: ')).strip()
+                result = input(_('Choose your coordinate using one LETTER from A to Q and one NUMBER from 0 to 16. \n'
+                                 'Ex: a1, b15, c10 and etc... \n\nCoordinates: ')).strip()
 
                 x = int(LETTERS[result[0].lower()])
                 y = int(result[1:].strip())
