@@ -1,15 +1,21 @@
 Changelog
 ---------
 
+0.3.5
+-----
+
+* Use vertical label in upper case
+
+
 0.3.4
 -----
 
-* Add more status messages 
+* Add more status messages
 
 0.3.3
 -----
 
-* Fix logical 
+* Fix logical
 
 0.3.1
 -----
@@ -37,7 +43,7 @@ Changelog
 0.3.2
 -----
 
-* Fix locale file 
+* Fix locale file
 
 0.3.1
 -----

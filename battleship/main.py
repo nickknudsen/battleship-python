@@ -31,7 +31,7 @@ def print_board(game):
     # Table Body
     for i, row in enumerate(game.matrix):
         print('| ', end='')
-        print('{:<2}'.format(NUMBERS[i]), end=" | ")
+        print('{:<2}'.format(NUMBERS[i].upper()), end=" | ")
         for col in row:
             if col['shooted']:
                 if not col['ship']:
