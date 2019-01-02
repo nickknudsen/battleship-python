@@ -29,7 +29,7 @@ Add sudo in the beginning if you met problem.
 How to Use
 ----------
 
-To play use py-battleship or `python -m battlefield`
+To play use py-battleship or python -m battlefield
 
 .. code-block:: bash
 

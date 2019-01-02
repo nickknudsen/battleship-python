@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.3.7
+-----
+
+* Fix: Readme Pypi
+
 0.3.6
 -----
 
