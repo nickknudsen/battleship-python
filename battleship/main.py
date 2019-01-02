@@ -13,13 +13,20 @@ _ = language.gettext
 LETTERS = {letter: str(index) for index, letter in enumerate(ascii_lowercase, start=0)}
 NUMBERS = {index: letter for index, letter in enumerate(ascii_lowercase, start=0)}
 
+dash = '-' * 90
 
-def print_board(game):
-    os.system('clear')
+
+def print_statistics(game):
     print(_('\nPoints: '), game.points, end="     ")
     print(_('Shots Available: '), game.shots, end="     ")
     print(_('Time elapsed: '), '{} sec'.format(int(game.time_elapsed)), end="\n")
-    print('-' * 90)
+    print(dash)
+
+
+def print_board(game):
+    os.system('clear')
+    print_statistics(game)
+
     # Table Header
     print('| ', end='')
     print('{:<3}'.format('-'), end='')
@@ -27,7 +34,8 @@ def print_board(game):
         print('| ', end='')
         print('{:<3}'.format(i), end='')
     print('| ', end='\n')
-    print('-' * 90)
+    print(dash)
+
     # Table Body
     for i, row in enumerate(game.matrix):
         print('| ', end='')
@@ -43,34 +51,41 @@ def print_board(game):
 
         print()
 
-    print('-' * 90)
+    print(dash)
+    print()
     print(_('Labels'))
-    print('-' * 7)
-    for ship in game.ships:
-        text = _('<{}> \t Initials: {} \t| Size: {} \t| Hits: {} | sunk: {}')
-        print(text.format(
+    for i, ship in enumerate(game.ships):
+        data_ship = (
             _(ship.name.title()),
             ship.initials,
             ship.length,
             ship.hits,
-            'yes' if ship.sink else 'no'
-        ))
+            _('yes') if ship.sink else _('no')
+        )
+        if i == 0:
+            print(dash)
+            label_header = (_('Ship'), _('Initials'), _('Size'), _('Hits'), _('sunk'))
+            print('{:<13}{:^11}{:^8}{:^8}{:^10}'.format(*label_header))
+            print(dash)
+            print('{:<13}{:^11}{:^8}{:^8}{:^10}'.format(*data_ship))
+        else:
+            print('{:<13}{:^11}{:^8}{:^8}{:^10}'.format(*data_ship))
 
     print()
-    print('-' * 90)
+    print(dash)
 
 
 def print_ship_hit(ship_hit, game):
     os.system('clear')
-    print(_('\nPoints: '), game.points, end="     ")
-    print(_('Shots Available: '), game.shots, end="     ")
-    print(_('Time elapsed: '), '{} sec'.format(int(game.time_elapsed)), end="\n")
-    print('-' * 90)
+    print_statistics(game)
+
     print('\n\n\n\n')
     if ship_hit.sink:
-        print(_('\t\t\t You Destroy a {}').format(ship_hit.name.title()))
+        message = _('You Destroy a {}').format(ship_hit.name.title())
     else:
-        print(_('\t\t\t You Hit a {}').format(ship_hit.name.title()))
+        message = _('You Hit a {}').format(ship_hit.name.title())
+
+    print('{:^88}'.format(message), end='\n')
 
     print('\n\n\n\n')
     input(_("Press Enter to continue..."))
@@ -82,16 +97,18 @@ def print_status(game, win=False):
     print(_('Lost Shots: '), game.lost_shot, end="     ")
     print(_('Right Shots: '), game.right_shot, end="     ")
     print(_('Shots Missing: '), game.shots, end="\n")
-    print('-' * 90)
+    print(dash)
     print(_('Sunken Ships: '), game.sunken_ships, end="     ")
     print(_('Missing Ships: '), game.total_ships - game.sunken_ships, end="   ")
     print(_('Time elapsed: {} sec').format(int(game.time_elapsed)), end="\n")
-    print('-' * 90)
+    print(dash)
+
     if win:
         print('{:^88}'.format(_('You WIN !!!!!')), end='\n')
     else:
         print('{:^88}'.format(_('You Lost !!!!!')), end='\n')
-    print('-' * 90)
+
+    print(dash)
     for s in game.ships:
         print(_('<{}> \t Sunk: {} \t| Hits: {}').format(
             s.name.title(),
@@ -99,7 +116,7 @@ def print_status(game, win=False):
             s.hits
         ))
 
-    print('-' * 90)
+    print(dash)
 
 
 def main():

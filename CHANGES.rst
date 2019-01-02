@@ -4,6 +4,13 @@ Changelog
 0.3.8
 -----
 
+* Refactor Main: Remove unnecessary code
+* Remove duplicated code
+* Add translation
+
+0.3.8
+-----
+
 * Fix: Readme Pypi
 
 0.3.7

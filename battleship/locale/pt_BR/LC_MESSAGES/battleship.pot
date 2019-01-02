@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-01 23:13-0200\n"
+"POT-Creation-Date: 2019-01-02 10:29-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: battleship/main.py:19 battleship/main.py:65 battleship/main.py:81
+#: battleship/main.py:20 battleship/main.py:96
 msgid ""
 "\n"
 "Points: "
@@ -25,15 +26,15 @@ msgstr ""
 "\n"
 "Pontos: "
 
-#: battleship/main.py:20 battleship/main.py:66
+#: battleship/main.py:20 battleship/main.py:66 battleship/main.py:21
 msgid "Shots Available: "
 msgstr "Tiros disponiveis: "
 
-#: battleship/main.py:21 battleship/main.py:67
+#: battleship/main.py:21 battleship/main.py:67 battleship/main.py:22
 msgid "Time elapsed: "
 msgstr "Tempo decorrido: "
 
-#: battleship/main.py:47
+#: battleship/main.py:47 battleship/main.py:56
 msgid "Labels"
 msgstr "Legenda"
 
@@ -49,11 +50,11 @@ msgstr "\t\t\t Você destruiu um {}"
 msgid "\t\t\t You Hit a {}"
 msgstr "\t\t\t Você acertou um {}"
 
-#: battleship/main.py:76
+#: battleship/main.py:76 battleship/main.py:91
 msgid "Press Enter to continue..."
 msgstr "Aperte Enter para continuar"
 
-#: battleship/main.py:107 battleship/main.py:112
+#: battleship/main.py:107 battleship/main.py:112 battleship/main.py:129
 msgid "Press CTRL+C to exit ..."
 msgstr "Aperte CTRL+C para sair ..."
 
@@ -68,7 +69,7 @@ msgstr ""
 "Coordenada: "
 
 #: battleship/main.py:129 battleship/main.py:128 battleship/main.py:133
-#: battleship/main.py:132 battleship/main.py:135
+#: battleship/main.py:132 battleship/main.py:135 battleship/main.py:152
 msgid ""
 "\n"
 "\n"
@@ -104,47 +105,49 @@ msgstr "submarino"
 msgid "frigate"
 msgstr "fragata"
 
-#: battleship/main.py:93 battleship/main.py:98
+#: battleship/main.py:93 battleship/main.py:98 battleship/main.py:63
+#: battleship/main.py:115
 msgid "yes"
 msgstr "sim"
 
-#: battleship/main.py:93 battleship/main.py:98
+#: battleship/main.py:93 battleship/main.py:98 battleship/main.py:63
+#: battleship/main.py:115
 msgid "no"
 msgstr "não"
 
-#: battleship/main.py:82
+#: battleship/main.py:82 battleship/main.py:97
 msgid "Lost Shots: "
 msgstr "Tiros Perdidos"
 
-#: battleship/main.py:83
+#: battleship/main.py:83 battleship/main.py:98
 msgid "Right Shots: "
 msgstr "Tiros Certos"
 
-#: battleship/main.py:84
+#: battleship/main.py:84 battleship/main.py:99
 msgid "Shots Missing: "
 msgstr "Tiros Faltando"
 
-#: battleship/main.py:86
+#: battleship/main.py:86 battleship/main.py:101
 msgid "Sunken Ships: "
 msgstr "Navios Afundados"
 
-#: battleship/main.py:87
+#: battleship/main.py:87 battleship/main.py:102
 msgid "Missing Ships: "
 msgstr "Navios Faltando"
 
-#: battleship/main.py:88
+#: battleship/main.py:88 battleship/main.py:103
 msgid "Time elapsed: {} sec"
 msgstr "Tempo decorrido: {} sec"
 
-#: battleship/main.py:91
+#: battleship/main.py:91 battleship/main.py:107
 msgid "You WIN !!!!!"
 msgstr "Você Venceu !!!!!"
 
-#: battleship/main.py:93
+#: battleship/main.py:93 battleship/main.py:109
 msgid "You Lost !!!!!"
 msgstr "Você Perdeu !!!!!"
 
-#: battleship/main.py:96
+#: battleship/main.py:96 battleship/main.py:113
 msgid "<{}> \t Sunk: {} \t| Hits: {}"
 msgstr "<{}> \t Afundado: {} \t| Acertos: {}"
 
@@ -172,7 +175,7 @@ msgstr ""
 "\n"
 "Coordenadas: "
 
-#: battleship/main.py:113
+#: battleship/main.py:113 battleship/main.py:130
 msgid ""
 "Choose your coordinate using one LETTER from A to Q and one NUMBER from 0 to "
 "16. \n"
@@ -184,3 +187,31 @@ msgstr ""
 "Ex: a1, b15, c10 e etc... \n"
 "\n"
 "Coordenadas: "
+
+#: battleship/main.py:67
+msgid "Ship"
+msgstr "Navio"
+
+#: battleship/main.py:67
+msgid "Initials"
+msgstr "Sigla"
+
+#: battleship/main.py:67
+msgid "Size"
+msgstr "Tamanho"
+
+#: battleship/main.py:67
+msgid "Hits"
+msgstr "Acertos"
+
+#: battleship/main.py:67
+msgid "sunk"
+msgstr "Afundou"
+
+#: battleship/main.py:84
+msgid "You Destroy a {}"
+msgstr "Você destruiu um {}"
+
+#: battleship/main.py:86
+msgid "You Hit a {}"
+msgstr "Você acertou um {}"
