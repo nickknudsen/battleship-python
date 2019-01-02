@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.3.4
+-----
+
+* Add more status messages 
+
 0.3.3
 -----
 
