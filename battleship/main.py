@@ -98,23 +98,31 @@ def print_status(game, win=False):
     print(_('Right Shots: '), game.right_shot, end="     ")
     print(_('Shots Missing: '), game.shots, end="\n")
     print(dash)
+    if win:
+        message = _('You WIN !!!!!')
+    else:
+        message = _('You Lost !!!!!')
+
+    print('\n\n\n{:^90}'.format(message), end='\n\n\n')
+    print(dash)
     print(_('Sunken Ships: '), game.sunken_ships, end="     ")
     print(_('Missing Ships: '), game.total_ships - game.sunken_ships, end="   ")
     print(_('Time elapsed: {} sec').format(int(game.time_elapsed)), end="\n")
-    print(dash)
 
-    if win:
-        print('{:^88}'.format(_('You WIN !!!!!')), end='\n')
-    else:
-        print('{:^88}'.format(_('You Lost !!!!!')), end='\n')
-
-    print(dash)
-    for s in game.ships:
-        print(_('<{}> \t Sunk: {} \t| Hits: {}').format(
-            s.name.title(),
-            _('yes') if s.sink else _('no'),
-            s.hits
-        ))
+    for i, ship in enumerate(game.ships):
+        data_ship = (
+            _(ship.name.title()),
+            ship.hits,
+            _('yes') if ship.sink else _('no')
+        )
+        if i == 0:
+            print(dash)
+            label_header = (_('Ship'), _('Hits'), _('sunk'))
+            print('{:<13}{:^8}{:^10}'.format(*label_header))
+            print(dash)
+            print('{:<13}{:^8}{:^10}'.format(*data_ship))
+        else:
+            print('{:<13}{:^8}{:^10}'.format(*data_ship))
 
     print(dash)
 
@@ -128,7 +136,7 @@ def main():
             try:
                 print(_('Press CTRL+C to exit ...'))
                 result = input(_('Choose your coordinate using one LETTER from A to Q and one NUMBER from 0 to 16. \n'
-                                 'Ex: a1, b15, c10 and etc... \n\nCoordinates: ')).strip()
+                                 'Ex: a1, b15, c10 and etc... \n\nCoordinate: ')).strip()
 
                 x = int(LETTERS[result[0].lower()])
                 y = int(result[1:].strip())
@@ -149,7 +157,7 @@ def main():
                     sys.exit(print_status(game))
             except Exception as exc:
                 os.system('clear')
-                input(_('\n\n\n\t\t\tYou can only use letters with numbers. Ex: a1, c10, etc...'))
+                input('{:^90}'.format(_('You can only use letters with numbers. Ex: a1, c10, etc...')))
                 print_board(game)
             except KeyboardInterrupt:
                 sys.exit(print_status(game))

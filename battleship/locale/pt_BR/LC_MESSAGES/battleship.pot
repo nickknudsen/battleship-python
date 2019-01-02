@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-02 10:29-0200\n"
+"POT-Creation-Date: 2019-01-02 11:11-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,10 +38,6 @@ msgstr "Tempo decorrido: "
 msgid "Labels"
 msgstr "Legenda"
 
-#: battleship/main.py:50
-msgid "<{}> \t Initials: {} \t| Size: {} \t| Hits: {} | sunk: {}"
-msgstr "<{}> \t Siglas: {} \t| Tamanho: {} \t| Acertos: {} | Afundado: {}"
-
 #: battleship/main.py:71
 msgid "\t\t\t You Destroy a {}"
 msgstr "\t\t\t Você destruiu um {}"
@@ -57,29 +53,6 @@ msgstr "Aperte Enter para continuar"
 #: battleship/main.py:107 battleship/main.py:112 battleship/main.py:129
 msgid "Press CTRL+C to exit ..."
 msgstr "Aperte CTRL+C para sair ..."
-
-#: battleship/main.py:108 battleship/main.py:113
-msgid ""
-"Choose your coordinates. Ex: a1, b15: c10 \n"
-"\n"
-"Coordinates: "
-msgstr ""
-"Escolha a sua coordenada. Ex: a1, b15: c10 \n"
-"\n"
-"Coordenada: "
-
-#: battleship/main.py:129 battleship/main.py:128 battleship/main.py:133
-#: battleship/main.py:132 battleship/main.py:135 battleship/main.py:152
-msgid ""
-"\n"
-"\n"
-"\n"
-"\t\t\tYou can only use letters with numbers. Ex: a1, c10, etc..."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"\t\t\tVocê só pode usar letras com numeros. Ex: a1, c10, etc..."
 
 #: battleship/battleship.py:74
 msgid "carrier"
@@ -151,43 +124,6 @@ msgstr "Você Perdeu !!!!!"
 msgid "<{}> \t Sunk: {} \t| Hits: {}"
 msgstr "<{}> \t Afundado: {} \t| Acertos: {}"
 
-#: battleship/main.py:113
-msgid ""
-"Choose your coordinates using one LETTER and on number from 0 to 16. Ex: a1, "
-"b15, c10 and etc... \n"
-"\n"
-"Coordinates: "
-msgstr ""
-"Escolha sua coordenada usando uma LETRA e um NUMERO de 0 to 16. Ex: a1, b15, "
-"c10 and etc... \n"
-"\n"
-"Coordenadas: "
-
-#: battleship/main.py:113
-msgid ""
-"Choose your coordinate using one LETTER and one NUMBER from 0 to 16. Ex: a1, "
-"b15, c10 and etc... \n"
-"\n"
-"Coordinates: "
-msgstr ""
-"Escolha sua coordenada usando uma LETRA e um NUMERO de 0 to 16. Ex: a1, b15, "
-"c10 and etc... \n"
-"\n"
-"Coordenadas: "
-
-#: battleship/main.py:113 battleship/main.py:130
-msgid ""
-"Choose your coordinate using one LETTER from A to Q and one NUMBER from 0 to "
-"16. \n"
-"Ex: a1, b15, c10 and etc... \n"
-"\n"
-"Coordinates: "
-msgstr ""
-"Escolha sua coordenada usando uma LETRA de A à Q e um NUMERO de 0 to 16. \n"
-"Ex: a1, b15, c10 e etc... \n"
-"\n"
-"Coordenadas: "
-
 #: battleship/main.py:67
 msgid "Ship"
 msgstr "Navio"
@@ -215,3 +151,20 @@ msgstr "Você destruiu um {}"
 #: battleship/main.py:86
 msgid "You Hit a {}"
 msgstr "Você acertou um {}"
+
+#: battleship/main.py:130
+msgid ""
+"Choose your coordinate using one LETTER from A to Q and one NUMBER from 0 to "
+"16. \n"
+"Ex: a1, b15, c10 and etc... \n"
+"\n"
+"Coordinate: "
+msgstr ""
+"Escolha sua coordenada usando uma LETRA de A à Q e um NUMERO de 0 to 16. \n"
+"Ex: a1, b15, c10 e etc... \n"
+"\n"
+"Coordenada: "
+
+#: battleship/main.py:152
+msgid "You can only use letters with numbers. Ex: a1, c10, etc..."
+msgstr "Você só pode usar letras com numeros. Ex: a1, c10, etc..."

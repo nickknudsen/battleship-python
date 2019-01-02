@@ -1,6 +1,12 @@
 Changelog
 ---------
 
+0.3.12
+------
+
+* Improve UI to print statistics
+
+
 0.3.11
 ------
 
