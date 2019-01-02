@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-01 20:28-0200\n"
-"PO-Revision-Date: 2019-01-01 20:28-0200\n"
+"POT-Creation-Date: 2019-01-01 22:26-0200\n"
+"PO-Revision-Date: 2019-01-01 22:26-0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: battleship/main.py:19 battleship/main.py:65
+#: battleship/main.py:19 battleship/main.py:65 battleship/main.py:81
 msgid ""
 "\n"
 "Points: "
@@ -54,11 +54,11 @@ msgstr "\t\t\t Você acertou um {}"
 msgid "Press Enter to continue..."
 msgstr "Aperte Enter para continuar"
 
-#: battleship/main.py:107
+#: battleship/main.py:107 battleship/main.py:112
 msgid "Press CTRL+C to exit ..."
 msgstr "Aperte CTRL+C para sair ..."
 
-#: battleship/main.py:108
+#: battleship/main.py:108 battleship/main.py:113
 msgid ""
 "Choose your coordinates. Ex: a1, b15: c10 \n"
 "\n"
@@ -68,7 +68,8 @@ msgstr ""
 "\n"
 "Coordenada: "
 
-#: battleship/main.py:129 battleship/main.py:128
+#: battleship/main.py:129 battleship/main.py:128 battleship/main.py:133
+#: battleship/main.py:132
 msgid ""
 "\n"
 "\n"
@@ -104,10 +105,46 @@ msgstr "submarino"
 msgid "frigate"
 msgstr "fragata"
 
-#: battleship/main.py:93
+#: battleship/main.py:93 battleship/main.py:98
 msgid "yes"
-msgstr ""
+msgstr "sim"
+
+#: battleship/main.py:93 battleship/main.py:98
+msgid "no"
+msgstr "não"
+
+#: battleship/main.py:82
+msgid "Lost Shots: "
+msgstr "Tiros Perdidos"
+
+#: battleship/main.py:83
+msgid "Right Shots: "
+msgstr "Tiros Certos"
+
+#: battleship/main.py:84
+msgid "Shots Missing: "
+msgstr "Tiros Faltando"
+
+#: battleship/main.py:86
+msgid "Sunken Ships: "
+msgstr "Navios Afundados"
+
+#: battleship/main.py:87
+msgid "Missing Ships: "
+msgstr "Navios Faltando"
+
+#: battleship/main.py:88
+msgid "Time elapsed: {} sec"
+msgstr "Tempo decorrido: {} sec"
+
+#: battleship/main.py:91
+msgid "You WIN !!!!!"
+msgstr "Você Venceu !!!!!"
 
 #: battleship/main.py:93
-msgid "no"
-msgstr ""
+msgid "You Lost !!!!!"
+msgstr "Você Perdeu !!!!!"
+
+#: battleship/main.py:96
+msgid "<{}> \t Sunk: {} \t| Hits: {}"
+msgstr "<{}> \t Afundado: {} \t| Acertos: {}"

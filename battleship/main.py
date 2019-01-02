@@ -60,11 +60,11 @@ def print_board(game):
     print('-' * 90)
 
 
-def print_ship_hit(ship_hit, points, shots, time_elapsed):
+def print_ship_hit(ship_hit, game):
     os.system('clear')
-    print(_('\nPoints: '), points, end="     ")
-    print(_('Shots Available: '), shots, end="     ")
-    print(_('Time elapsed: '), '{} sec'.format(int(time_elapsed)), end="\n")
+    print(_('\nPoints: '), game.points, end="     ")
+    print(_('Shots Available: '), game.shots, end="     ")
+    print(_('Time elapsed: '), '{} sec'.format(int(game.time_elapsed)), end="\n")
     print('-' * 90)
     print('\n\n\n\n')
     if ship_hit.sink:
@@ -76,19 +76,24 @@ def print_ship_hit(ship_hit, points, shots, time_elapsed):
     input(_("Press Enter to continue..."))
 
 
-def print_status(game):
+def print_status(game, win=False):
     os.system('clear')
-    print('\nPoints: ', game.points, end="     ")
-    print('Lost Shots: ', game.lost_shot, end="     ")
-    print('Right Shots: ', game.lost_shot, end="     ")
-    print('Shots Missing: ', game.shots, end="\n")
+    print(_('\nPoints: '), game.points, end="     ")
+    print(_('Lost Shots: '), game.lost_shot, end="     ")
+    print(_('Right Shots: '), game.right_shot, end="     ")
+    print(_('Shots Missing: '), game.shots, end="\n")
     print('-' * 90)
-    print('Sunken Ships: ', game.sunken_ships, end="     ")
-    print('Missing Ships: ', game.total_ships - game.sunken_ships, end="   ")
-    print('Time elapsed: {} sec'.format(int(game.time_elapsed)), end="\n")
+    print(_('Sunken Ships: '), game.sunken_ships, end="     ")
+    print(_('Missing Ships: '), game.total_ships - game.sunken_ships, end="   ")
+    print(_('Time elapsed: {} sec').format(int(game.time_elapsed)), end="\n")
+    print('-' * 90)
+    if win:
+        print('{:^88}'.format(_('You WIN !!!!!')), end='\n')
+    else:
+        print('{:^88}'.format(_('You Lost !!!!!')), end='\n')
     print('-' * 90)
     for s in game.ships:
-        print('<{}> \t Sunk: {} \t| Hits: {}'.format(
+        print(_('<{}> \t Sunk: {} \t| Hits: {}').format(
             s.name.title(),
             _('yes') if s.sink else _('no'),
             s.hits
@@ -115,14 +120,15 @@ def main():
 
                 is_valid, ship = game.play(x, y)
                 if is_valid:
-                    print_ship_hit(ship, game.points, game.shots, game.time_elapsed)
+                    print_ship_hit(ship, game)
                     break
 
                 print_board(game)
+                if game.is_finished():
+                    sys.exit(print_status(game, win=True))
 
                 if game.end_game():
                     sys.exit(print_status(game))
-
             except Exception as exc:
                 os.system('clear')
                 input(_('\n\n\n\t\t\tYou can only use letters with numbers. Ex: a1, c10, etc...'))

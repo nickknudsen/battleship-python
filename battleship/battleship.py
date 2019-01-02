@@ -212,10 +212,6 @@ class Game(Board):
 
             self.right_shot += 1
             self.points += ship.points
-
-            if self.is_finished() or self.shots == 0:
-                raise Exception('Finish')
-
             return True, ship
 
     def end_game(self):
