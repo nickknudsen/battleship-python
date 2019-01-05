@@ -4,7 +4,16 @@ from datetime import datetime
 import random
 from copy import deepcopy
 
-from .exceptions import InvalidPosition
+from .constants import LETTERS
+from .exceptions import InvalidLocation, InvalidCoordinate, InvalidFormat
+from .language import language
+
+_ = language.gettext
+
+MESSAGE_ERROR = _(
+    'You need to choose a letter from A to Q \n'
+    'and one NUMBER from 0 to 16.'
+)
 
 
 class Ship:
@@ -31,7 +40,7 @@ class Ship:
         return all(results)
 
     @property
-    def positions(self):
+    def total_positions(self):
         return len(self.hit_positions)
 
     def add_location(self, x, y, hit):
@@ -40,7 +49,7 @@ class Ship:
                 len(self.hit_positions) + 1,
                 self.length
             )
-            raise InvalidPosition(text)
+            raise InvalidLocation(text)
 
         self.hit_positions.append({
             'x': x,
@@ -68,12 +77,12 @@ class Board:
         'shooted': False,
     }
     SHIP_TYPES = [
-        {'name': 'carrier', 'length': 5, 'points': 250, 'initials': 'CA'},
-        {'name': 'battleship', 'length': 4, 'points': 200, 'initials': 'BT'},
-        {'name': 'cruiser', 'length': 3, 'points': 150, 'initials': 'CR'},
-        {'name': 'destroyer', 'length': 3, 'points': 150, 'initials': 'DT'},
-        {'name': 'submarine', 'length': 2, 'points': 100, 'initials': 'SB'},
-        {'name': 'frigate', 'length': 2, 'points': 100, 'initials': 'FR'},
+        {'name': _('carrier'), 'length': 5, 'points': 250, 'initials': 'CA'},
+        {'name': _('battleship'), 'length': 4, 'points': 200, 'initials': 'BT'},
+        {'name': _('cruiser'), 'length': 3, 'points': 150, 'initials': 'CR'},
+        {'name': _('destroyer'), 'length': 3, 'points': 150, 'initials': 'DT'},
+        {'name': _('submarine'), 'length': 2, 'points': 100, 'initials': 'SB'},
+        {'name': _('frigate'), 'length': 2, 'points': 100, 'initials': 'FR'},
     ]
 
     def __init__(self):
@@ -89,7 +98,7 @@ class Board:
 
     @property
     def total_ships(self):
-        return len([ship for ship in self.ships if ship.positions])
+        return len([ship for ship in self.ships if ship.total_positions])
 
     def _init_ships(self):
         for _, ship_type in enumerate(self.SHIP_TYPES):
@@ -197,7 +206,19 @@ class Game(Board):
         end_time = datetime.now()
         return (end_time - self.start_time).total_seconds()
 
-    def play(self, x, y):
+    def play(self, raw_x, raw_y):
+
+
+        try:
+            x = int(LETTERS[raw_x.lower()])
+            y = int(raw_y.strip())
+        except ValueError:
+            msg = _('Invalid Format. {}. Coordinate: {}{}').format(MESSAGE_ERROR, raw_x, raw_y)
+            raise InvalidFormat(msg)
+
+        if x not in range(17) or y not in range(17):
+            msg = _('Invalid Coordinate. {}. Coordinate: {}{}').format(MESSAGE_ERROR, raw_x, raw_y)
+            raise InvalidCoordinate(msg)
 
         if self.matrix[x][y]['shooted']:
             return False, None

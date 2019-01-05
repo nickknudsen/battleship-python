@@ -2,16 +2,13 @@
 # encoding: utf-8
 import os
 import sys
-from string import ascii_lowercase
 
 from .battleship import Game
-from .exceptions import InvalidPosition
-from . import language
+from .constants import NUMBERS
+from .exceptions import InvalidCoordinate, InvalidFormat
+from .language import language
 
 _ = language.gettext
-
-LETTERS = {letter: str(index) for index, letter in enumerate(ascii_lowercase, start=0)}
-NUMBERS = {index: letter for index, letter in enumerate(ascii_lowercase, start=0)}
 
 dash = '-' * 90
 
@@ -91,6 +88,19 @@ def print_ship_hit(ship_hit, game):
     input(_("Press Enter to continue..."))
 
 
+def print_error_message(message):
+    os.system('clear')
+    print(dash)
+    print('\n\n\n\n')
+
+    print('{:^88}'.format(message), end='\n')
+
+    print('\n\n\n\n')
+    print(dash)
+    input(_("Press Enter to continue..."))
+
+
+
 def print_status(game, win=False):
     os.system('clear')
     print(_('\nPoints: '), game.points, end="     ")
@@ -98,6 +108,7 @@ def print_status(game, win=False):
     print(_('Right Shots: '), game.right_shot, end="     ")
     print(_('Shots Missing: '), game.shots, end="\n")
     print(dash)
+
     if win:
         message = _('You WIN !!!!!')
     else:
@@ -131,20 +142,22 @@ def main():
     game = Game()
     print_board(game)
 
-    while True:
+    try:
         while True:
-            try:
+            while True:
                 print(_('Press CTRL+C to exit ...'))
                 result = input(_('Choose your coordinate using one LETTER from A to Q and one NUMBER from 0 to 16. \n'
                                  'Ex: a1, b15, c10 and etc... \n\nCoordinate: ')).strip()
 
-                x = int(LETTERS[result[0].lower()])
-                y = int(result[1:].strip())
+                x, y = result[0], result[1:]
+                try:
+                    is_valid, ship = game.play(x, y)
+                except (InvalidFormat, InvalidCoordinate) as exc:
+                    os.system('clear')
+                    print_error_message(_(str(exc)))
+                    print_board(game)
+                    break
 
-                if (x > 16 and x < 0) or (y > 16 and y < 0):
-                    raise InvalidPosition()
-
-                is_valid, ship = game.play(x, y)
                 if is_valid:
                     print_ship_hit(ship, game)
                     break
@@ -155,11 +168,8 @@ def main():
 
                 if game.end_game():
                     sys.exit(print_status(game))
-            except Exception as exc:
-                os.system('clear')
-                input('{:^90}'.format(_('You can only use letters with numbers. Ex: a1, c10, etc...')))
-                print_board(game)
-            except KeyboardInterrupt:
-                sys.exit(print_status(game))
 
-        print_board(game)
+            print_board(game)
+
+    except KeyboardInterrupt:
+        sys.exit(print_status(game))

@@ -1,6 +1,14 @@
 Changelog
 ---------
 
+0.3.13
+------
+
+* BugFix: Exit game with CTRL+C
+* Move exception treatment to battlefield.py
+* Create more exceptions
+* Create a centralized language translator
+
 0.3.12
 ------
 
