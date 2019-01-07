@@ -1,6 +1,16 @@
 Changelog
 ---------
 
+1.0.0
+-----
+
+* Change game play to be Multiplayer
+* Change game to finish when CPU or Player1 wins or use CTRL+C
+* Refactor language to be central
+* Create Custom exceptions
+* Use Python Click to print the board using colors
+* Use Python Click to improve the main function
+
 0.3.13
 ------
 
