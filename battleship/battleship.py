@@ -5,9 +5,8 @@ import random
 from copy import deepcopy
 
 from .constants import LETTERS
-from .exceptions import InvalidLocation, InvalidCoordinate, InvalidFormat
+from .exceptions import InvalidLocation, InvalidCoordinate, InvalidFormat, InvalidShipInitial
 from .language import language
-
 _ = language.gettext
 
 MESSAGE_ERROR = _(
@@ -17,6 +16,7 @@ MESSAGE_ERROR = _(
 
 
 class Ship:
+
     def __init__(self, name, length, points, initials):
         self.direction = ''
         self.hit_positions = []
@@ -70,12 +70,11 @@ class Ship:
 
 
 class Board:
+    """
+    Board Game: Board responsible to create and control all battle area.
+    """
     COLS = 17
     ROWS = 17
-    DEFAULT_VALUE = {
-        'ship': None,
-        'shooted': False,
-    }
     SHIP_TYPES = [
         {'name': _('carrier'), 'length': 5, 'points': 250, 'initials': 'CA'},
         {'name': _('battleship'), 'length': 4, 'points': 200, 'initials': 'BT'},
@@ -85,12 +84,16 @@ class Board:
         {'name': _('frigate'), 'length': 2, 'points': 100, 'initials': 'FR'},
     ]
 
-    def __init__(self):
+    def __init__(self, ships_visible=False):
+        self.default_ship_value = {
+            'ship': None,
+            'shooted': False,
+            'visible': ships_visible,
+        }
         self.matrix = self.clear_board()
         self.sunken_ships = 0
         self.ships = []
         self.total_hits = 0
-        self._init_ships()
 
     @property
     def total_available_ships(self):
@@ -100,42 +103,96 @@ class Board:
     def total_ships(self):
         return len([ship for ship in self.ships if ship.total_positions])
 
-    def _init_ships(self):
-        for _, ship_type in enumerate(self.SHIP_TYPES):
-            self.ships.append(Ship(**ship_type))
+    def _get_ship_from_initials(self, initials):
+        for ship_data in self.SHIP_TYPES:
+            if ship_data['initials'] == initials:
+                return Ship(**ship_data)
+        return None
 
-    def _add_ship(self, ship):
+    def add_ship_auto(self, ship):
         direction = random.choice(['v', 'h'])
         ship.direction = direction
         length = ship.length
+        x = random.randint(0, self.COLS - length)
+        y = random.randint(0, self.ROWS - length)
 
-        if direction == 'h':
-            x = random.randint(0, self.COLS - length)
-            end_position = (x + length)
+        try:
+            self.validate_new_ship_position(ship.length, x, y, direction)
+        except InvalidCoordinate:
+            self.remove_ship(ship)
+            return self.add_ship_auto(ship)
 
-            for col in range(x, end_position):
-                if not self.is_available(x, col):
-                    return False
+        board_position = x if direction == 'h' else y
+        end_position = (board_position + length)
 
-                ship.add_location(x, col, False)
+        for pos in range(board_position, end_position):
+            coordinates = x, pos
+            if direction == 'v':
+                coordinates = pos, y
 
-                value = deepcopy(self.DEFAULT_VALUE)
-                value['ship'] = ship
-                self.matrix[x][col] = value
-        else:
-            y = random.randint(0, self.ROWS - length)
-            end_position = (y + length)
+            ship.add_location(*coordinates, False)
+            value = deepcopy(self.default_ship_value)
+            value['ship'] = ship
+            self.matrix[coordinates[0]][coordinates[1]] = value
 
-            for row in range(y, end_position):
-                if not self.is_available(row, y):
-                    return False
-
-                ship.add_location(row, y, False)
-                value = deepcopy(self.DEFAULT_VALUE)
-                value['ship'] = ship
-                self.matrix[row][y] = value
-
+        self.ships.append(ship)
         return True
+
+    def add_ship_manualy(self, ship_initials, x, y, direction):
+        ship = self._get_ship_from_initials(ship_initials)
+        if not ship:
+            raise InvalidShipInitial()
+
+        self.validate_new_ship_position(ship.length, x, y, direction)
+
+        ship.direction = direction
+        length = ship.length
+        board_position = x if direction == 'h' else y
+        end_position = (board_position + length)
+
+        for pos in range(board_position, end_position):
+            coordinates = x, pos
+            if direction == 'v':
+                coordinates = pos, y
+
+            ship.add_location(*coordinates, False)
+            value = deepcopy(self.default_ship_value)
+            value['ship'] = ship
+            self.matrix[coordinates[0]][coordinates[1]] = value
+
+        self.ships.append(ship)
+        return True
+
+    def validate_new_ship_position(self, ship_length, x, y, direction):
+        board_position = x if direction == 'h' else y
+        end_of_board = self.COLS if direction == 'h' else self.ROWS
+        end_position = (board_position + ship_length)
+
+        if end_position > end_of_board:
+            msg = 'Invalid Coordinate: The boat was off the board.'
+            raise InvalidCoordinate(msg)
+
+        for pos in range(board_position, end_position):
+            coordinates = pos, y
+            if direction == 'v':
+                coordinates = x, pos
+
+            if not self.is_available(*coordinates):
+                msg = 'Invalid Coordinate: Already exists a boat in this coordinate.'
+                raise InvalidCoordinate(msg)
+        return True
+
+    def auto_build_fleet(self):
+        for ship_type in self.SHIP_TYPES:
+            ship = Ship(**ship_type)
+            self.add_ship_auto(ship)
+
+    def clear_board(self):
+        default_ship_value = deepcopy(self.default_ship_value)
+        return [[default_ship_value for _ in range(self.COLS)] for _ in range(self.ROWS)]
+
+    def is_available(self, x, y):
+        return self.matrix[x][y] == deepcopy(self.default_ship_value)
 
     def is_finished(self):
         results = []
@@ -145,27 +202,9 @@ class Board:
             )
         return all(results)
 
-    def _remove_ship(self, ship):
+    def remove_ship(self, ship):
         for position in ship.hit_positions:
-            self.matrix[position['x']][position['y']] = deepcopy(self.DEFAULT_VALUE)
-
-    def add_ship(self, ship):
-        added = self._add_ship(ship)
-        if not added:
-            self._remove_ship(ship)
-            return self.add_ship(ship)
-        return added
-
-    def build_fleet(self):
-        for ship in self.ships:
-            self.add_ship(ship)
-
-    def clear_board(self):
-        default_value = deepcopy(self.DEFAULT_VALUE)
-        return [[default_value for _ in range(self.COLS)] for _ in range(self.ROWS)]
-
-    def is_available(self, x, y):
-        return self.matrix[x][y] == deepcopy(self.DEFAULT_VALUE)
+            self.matrix[position['x']][position['y']] = deepcopy(self.default_ship_value)
 
     def shot(self, x, y):
         position = self.matrix[x][y].copy()
@@ -190,25 +229,22 @@ class Board:
 
 
 class Game(Board):
-    def __init__(self):
-        super().__init__()
+
+    def __init__(self, player, ships_visible=False):
+        super().__init__(ships_visible=ships_visible)
+        self.player = player
         self.start_time = datetime.now()
-        self.shots = 50
+        self.shots = 0
         self.points = 0
         self.lost_shot = 0
         self.right_shot = 0
-
-        # Building Fleet
-        self.build_fleet()
 
     @property
     def time_elapsed(self):
         end_time = datetime.now()
         return (end_time - self.start_time).total_seconds()
 
-    def play(self, raw_x, raw_y):
-
-
+    def _get_coordinates_from_raw(self, raw_x, raw_y):
         try:
             x = int(LETTERS[raw_x.lower()])
             y = int(raw_y.strip())
@@ -216,14 +252,18 @@ class Game(Board):
             msg = _('Invalid Format. {}. Coordinate: {}{}').format(MESSAGE_ERROR, raw_x, raw_y)
             raise InvalidFormat(msg)
 
-        if x not in range(17) or y not in range(17):
+        if x not in range(self.COLS) or y not in range(self.ROWS):
             msg = _('Invalid Coordinate. {}. Coordinate: {}{}').format(MESSAGE_ERROR, raw_x, raw_y)
             raise InvalidCoordinate(msg)
+        return x, y
+
+    def play(self, raw_x, raw_y):
+        x, y = self._get_coordinates_from_raw(raw_x, raw_y)
 
         if self.matrix[x][y]['shooted']:
             return False, None
         else:
-            self.shots -= 1
+            self.shots += 1
 
             hit, ship = self.shot(x, y)
 
@@ -235,7 +275,8 @@ class Game(Board):
             self.points += ship.points
             return True, ship
 
-    def end_game(self):
-        if self.is_finished() or self.shots == 0:
-            return True
-        return False
+    def __str__(self):
+        return self.player.title()
+
+    def __repr__(self):
+        return "<Game: Player: {}>".format(self.__str__())

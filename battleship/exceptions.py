@@ -16,3 +16,7 @@ class InvalidLocation(Exception):
 
 class InvalidFormat(Exception):
     pass
+
+
+class InvalidShipInitial(Exception):
+    pass
