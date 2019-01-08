@@ -60,8 +60,8 @@ Please send pull requests, very much appreciated.
    :target: https://github.com/rhenter/battleship-python/blob/master/LICENSE
 .. |PyPI latest| image:: https://img.shields.io/pypi/v/py-battleship.svg?maxAge=360
    :target: https://pypi.python.org/pypi/py-battleship
-.. |Travis Build Status| image:: https://api.travis-ci.org/terryyin/translate-python.png?branch=master
-   :target: https://travis-ci.org/terryyin/translate-python
-.. |Coverage| image:: https://codecov.io/gh/codecov/example-python/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/codecov/example-python
+.. |Travis Build Status| image:: https://api.travis-ci.org/rhenter/battleship-python.png?branch=master
+   :target: https://travis-ci.org/rhenter/battleship-python
+.. |Coverage| image:: https://codecov.io/gh/rhenter/battleship-python/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/rhenter/battleship-python
 
