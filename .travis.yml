@@ -10,5 +10,5 @@ install:
 
 script:
   - py.test -vv -s
-  -
+  - codecov
 
