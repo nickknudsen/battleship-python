@@ -23,7 +23,6 @@ class Ship:
         self.initials = initials
         self.length = length
         self.name = name
-        self.sink = False
         self.points = points
 
     @property
@@ -37,7 +36,11 @@ class Ship:
             results.append(
                 position['hit']
             )
-        return all(results)
+        return all(results) if results else False
+
+    @property
+    def sunk(self):
+        return self.is_destroyed is True
 
     @property
     def total_positions(self):
@@ -222,7 +225,6 @@ class Board:
         self.total_hits += 1
         if position['ship'].is_destroyed:
             self.sunken_ships += 1
-            position['ship'].sink = True
 
         self.matrix[x][y] = position
         return True, position['ship']

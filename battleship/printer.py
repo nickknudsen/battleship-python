@@ -90,14 +90,14 @@ def print_board(game_board1, game_board2, cpu_player=False):
             board_ship.initials,
             board_ship.length,
             board_ship.hits,
-            _('yes') if board_ship.sink else _('no')
+            _('yes') if board_ship.sunk else _('no')
         )
         data_board2_ship = (
             _(board2_ship.name.title()),
             board2_ship.initials,
             board2_ship.length,
             board2_ship.hits,
-            _('yes') if board2_ship.sink else _('no')
+            _('yes') if board2_ship.sunk else _('no')
         )
         if i == 0:
             cprint(dash, nl=False)
@@ -128,7 +128,7 @@ def print_ship_hit(ship_hit, player):
     click.clear()
     # print_statistics(game_player)
     cprint('\n\n\n\n')
-    if ship_hit.sink:
+    if ship_hit.sunk:
         if player == 1:
             message = _('You Destroy a {}.').format(ship_hit.name.title())
         else:
@@ -181,7 +181,7 @@ def print_status(game_player, win=False):
         data_board_ship = (
             _(ship.name.title()),
             ship.hits,
-            _('yes') if ship.sink else _('no')
+            _('yes') if ship.sunk else _('no')
         )
         if i == 0:
             cprint(dash)
