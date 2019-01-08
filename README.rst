@@ -62,6 +62,6 @@ Please send pull requests, very much appreciated.
    :target: https://pypi.python.org/pypi/py-battleship
 .. |Travis Build Status| image:: https://api.travis-ci.org/terryyin/translate-python.png?branch=master
    :target: https://travis-ci.org/terryyin/translate-python
-.. |Coverage| image:: https://coveralls.io/repos/github/rhenter/battleship-python/badge.svg?branch=master
-    :target: https://coveralls.io/github/rhenter/battleship-python?branch=master
+.. |Coverage| image:: https://codecov.io/gh/codecov/example-python/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/codecov/example-python
 
