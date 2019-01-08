@@ -37,7 +37,7 @@ def get_col_value(col):
         if not col['ship']:
             return st('{:^4}'.format('O'), fg='yellow')
         else:
-            return st('{:^4}'.format(col['ship'].initials), fg='green')
+            return st('{:^4}'.format(col['ship'].initials), fg='red')
     else:
         if col['visible'] and col['ship']:
             return st('{:^4}'.format(col['ship'].initials), fg='green')
@@ -139,7 +139,7 @@ def print_ship_hit(ship_hit, player):
         else:
             message = _('Your {} was Hit.').format(ship_hit.name.title())
 
-    cprint(st('{:^88}'.format(message), fg='green', blink=True))
+    cprint(st('{:^88}'.format(message), fg='green'))
 
     cprint('\n\n\n\n')
     input(_("Press Enter to continue..."))
@@ -166,9 +166,9 @@ def print_status(game_player, win=False):
     cprint(dash)
 
     if win:
-        message = st('\n\n\n{:^90}'.format(_('You WIN !!!!!')), fg='green', blink=True)
+        message = st('\n\n\n{:^90}'.format(_('You WIN !!!!!')), fg='green')
     else:
-        message = st('\n\n\n{:^90}'.format(_('You Lost !!!!!')), fg='red', blink=True)
+        message = st('\n\n\n{:^90}'.format(_('You Lost !!!!!')), fg='red')
 
     cprint(message)
     cprint('\n\n\n')
