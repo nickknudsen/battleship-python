@@ -2,7 +2,7 @@
 Battleship Python
 =================
 
-|PyPI latest| |PyPI Version| |PyPI License|
+|PyPI latest| |PyPI Version| |PyPI License|  |Travis Build Status| |Coverage|
 
 
 This is a simple, but super cool Battleship game. Lets Play!!!
@@ -31,51 +31,8 @@ How to Use
 
 To play use py-battleship or python -m battlefield
 
-.. code-block:: bash
-
-    $ py-battleship
-
-    Points:  1900     Shots Available:  31     Time elapsed:  178 sec
-    ------------------------------------------------------------------------------------------
-    | - | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
-    ------------------------------------------------------------------------------------------
-    | A | CA | CA | CA | CA | CA | O  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | B | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | C | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | D | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | E | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | F | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | G | .  | .  | .  | .  | .  | O  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | H | O  | .  | .  | .  | .  | .  | .  | CR | O  | O  | .  | .  | .  | .  | .  | .  | .  |
-    | I | .  | .  | .  | .  | .  | .  | .  | CR | FR | .  | .  | .  | .  | .  | .  | .  | .  |
-    | J | .  | .  | .  | .  | .  | .  | O  | CR | FR | .  | .  | .  | .  | .  | .  | .  | .  |
-    | K | .  | .  | .  | .  | .  | .  | .  | .  | O  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | L | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | M | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | O  | .  |
-    | N | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | O | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    | P | .  | .  | .  | .  | .  | .  | .  | .  | .  | O  | .  | .  | .  | .  | .  | .  | .  |
-    | Q | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  | .  |
-    ------------------------------------------------------------------------------------------
-
-    Labels
-    ------------------------------------------------------------------------------------------
-    Ship          Initials    Size    Hits     sunk
-    ------------------------------------------------------------------------------------------
-    Carrier          CA        5       5       yes
-    Battleship       BT        4       0        no
-    Cruiser          CR        3       3       yes
-    Destroyer        DT        3       0        no
-    Submarine        SB        2       0        no
-    Frigate          FR        2       2       yes
-
-    ------------------------------------------------------------------------------------------
-    Press CTRL+C to exit ...
-    Choose your coordinate using one LETTER from A to Q and one NUMBER from 0 to 16.
-    Ex: a1, b15, c10 and etc...
-
-    Coordinates:
-
+.. image:: docs/images/game.png
+   :width: 600
 
 Documentation
 -------------
@@ -103,3 +60,8 @@ Please send pull requests, very much appreciated.
    :target: https://github.com/rhenter/battleship-python/blob/master/LICENSE
 .. |PyPI latest| image:: https://img.shields.io/pypi/v/py-battleship.svg?maxAge=360
    :target: https://pypi.python.org/pypi/py-battleship
+.. |Travis Build Status| image:: https://api.travis-ci.org/terryyin/translate-python.png?branch=master
+   :target: https://travis-ci.org/terryyin/translate-python
+.. |Coverage| image:: https://coveralls.io/repos/github/rhenter/battleship-python/badge.svg?branch=master
+    :target: https://coveralls.io/github/rhenter/battleship-python?branch=master
+
