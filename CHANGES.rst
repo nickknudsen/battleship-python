@@ -1,6 +1,12 @@
 Changelog
 ---------
 
+1.1.2
+-----
+
+* Change ci to cicleCI
+* Update Pypi
+
 1.1.1
 -----
 
