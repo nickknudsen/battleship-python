@@ -1,6 +1,18 @@
 Changelog
 ---------
 
+1.2.0
+-----
+
+* BugFix: Adding ship using same coordinates
+* BugFix: Robbot using repeated coordinates
+
+
+1.1.3
+-----
+
+* Add raw image to be seen on Pypi
+
 1.1.2
 -----
 
