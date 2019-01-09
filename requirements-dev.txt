@@ -3,8 +3,8 @@ codecov
 ipdb
 ipython
 pre-commit
-pytest-cov
 pytest
+pytest-cov
 Sphinx
 sphinx-autobuild
 sphinx-rtd-theme
