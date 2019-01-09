@@ -31,7 +31,7 @@ How to Use
 
 To play use py-battleship or python -m battlefield
 
-.. image:: docs/images/game.png
+.. image:: https://raw.githubusercontent.com/rhenter/battleship-python/master/game.png
    :width: 600
 
 Documentation
