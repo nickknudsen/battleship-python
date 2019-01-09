@@ -1,6 +1,14 @@
 Changelog
 ---------
 
+1.1.0
+-----
+
+* Add tests
+* Add codecov and travis integration
+* Update Readme
+* Remove blink from messages
+
 1.0.0
 -----
 

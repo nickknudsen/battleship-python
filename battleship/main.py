@@ -24,7 +24,7 @@ def get_random_shot():
     return x, y
 
 
-def player_shot(board_opponent, random_shot=False):
+def player_shot(board_opponent, player, random_shot=False):
     if random_shot:
         x, y = get_random_shot()
     else:
@@ -43,7 +43,7 @@ def player_shot(board_opponent, random_shot=False):
         return False
 
     if is_valid:
-        printer.print_ship_hit(ship, 1)
+        printer.print_ship_hit(ship, player)
         return False
 
     # Check if Wins
@@ -122,7 +122,7 @@ def play():
                 click.echo(st(_('Press CTRL+C to exit ...'), blink=True))
 
                 # Player1 Move against Player2
-                if not player_shot(board_opponent=game_board2):
+                if not player_shot(board_opponent=game_board2, player=1):
                     break
 
                 printer.print_board(game_board1, game_board2)
@@ -135,7 +135,7 @@ def play():
                     time.sleep(3)
 
                 # Player2 Move against Player1
-                if not player_shot(board_opponent=game_board1, random_shot=random_shot):
+                if not player_shot(board_opponent=game_board1, player=2, random_shot=random_shot):
                     break
 
             printer.print_board(game_board1, game_board2)

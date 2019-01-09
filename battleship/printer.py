@@ -128,6 +128,7 @@ def print_ship_hit(ship_hit, player):
     click.clear()
     # print_statistics(game_player)
     cprint('\n\n\n\n')
+
     if ship_hit.sunk:
         if player == 1:
             message = _('You Destroy a {}.').format(ship_hit.name.title())
