@@ -50,6 +50,7 @@ jobs:
           command: |
             . venv/bin/activate
             py.test -vv -s --cov-report=term-missing --cov-report=html
+            codecov
 
       - store_artifacts:
           path: htmlcov
