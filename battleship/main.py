@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 # encoding: utf-8
 import sys
-import random
 import time
 
 import click
 from click import style as st
 from click.exceptions import Abort as AbortException
 
-from .battleship import Game
-from .constants import LETTERS
+from .battleship import Game, Brainiac
 from .exceptions import InvalidCoordinate, InvalidFormat
 from .language import language
 from .version import __version__
@@ -18,15 +16,9 @@ from . import printer
 _ = language.gettext
 
 
-def get_random_shot():
-    x = random.choice(list(LETTERS.keys())[:17])
-    y = random.randint(0, Game.ROWS)
-    return x, y
-
-
-def player_shot(board_opponent, player, random_shot=False):
-    if random_shot:
-        x, y = get_random_shot()
+def player_shot(board_opponent, player, robot=None):
+    if robot:
+        x, y = robot.get_random_shot()
     else:
         result = click.prompt(_(
             'Choose your coordinate using one LETTER from A to Q and one NUMBER from 0 to '
@@ -36,13 +28,17 @@ def player_shot(board_opponent, player, random_shot=False):
         x, y = result[0], result[1:]
 
     try:
-        is_valid, ship = board_opponent.play(str(x), str(y))
+        hit, ship = board_opponent.play(str(x), str(y))
     except (InvalidFormat, InvalidCoordinate) as exc:
         click.clear()
         printer.print_error_message(_(str(exc)))
         return False
 
-    if is_valid:
+    # passing the shot status to Robot learn
+    if robot:
+        robot.shot_status(x, y, hit)
+
+    if hit:
         printer.print_ship_hit(ship, player)
         return False
 
@@ -128,14 +124,14 @@ def play():
                 printer.print_board(game_board1, game_board2)
 
                 # Player 2 shot
-                random_shot = False
+                robot = None
                 if game_board2.player == 'CPU':
-                    random_shot = True
+                    robot = Brainiac(game_board2)
                     click.echo('Player 2 is choosing a coordinate.')
-                    time.sleep(3)
+                    time.sleep(2)
 
                 # Player2 Move against Player1
-                if not player_shot(board_opponent=game_board1, player=2, random_shot=random_shot):
+                if not player_shot(board_opponent=game_board1, player=2, robot=robot):
                     break
 
             printer.print_board(game_board1, game_board2)

@@ -176,9 +176,9 @@ class Board:
             raise InvalidCoordinate(msg)
 
         for pos in range(board_position, end_position):
-            coordinates = pos, y
+            coordinates = x, pos
             if direction == 'v':
-                coordinates = x, pos
+                coordinates = pos, y
 
             if not self.is_available(*coordinates):
                 msg = 'Invalid Coordinate: Already exists a boat in this coordinate.'
@@ -263,7 +263,8 @@ class Game(Board):
         x, y = self._get_coordinates_from_raw(raw_x, raw_y)
 
         if self.matrix[x][y]['shooted']:
-            return False, None
+            msg = _('Invalid Coodinate. Already Used.').format(MESSAGE_ERROR, raw_x, raw_y)
+            raise InvalidCoordinate(msg)
         else:
             self.shots += 1
 
@@ -282,3 +283,29 @@ class Game(Board):
 
     def __repr__(self):
         return "<Game: Player: {}>".format(self.__str__())
+
+
+class Brainiac:
+    """Decision Robot
+    TODO: Change when hit a Ship
+    """
+    def __init__(self, player_board):
+        self.player_board = player_board
+        self.selected = []
+        self.shoots = []
+
+    def get_random_shot(self):
+        x = random.choice(list(LETTERS.keys())[:17])
+        y = random.randint(0, Game.ROWS - 1)
+        if (x, y) in self.selected:
+            self.get_random_shot()
+
+        self.selected.append((x, y))
+        return x, y
+
+    def shot_status(self, x, y, hit):
+        self.shoots.append({
+            'x': x,
+            'y': y,
+            'hit': hit
+        })
