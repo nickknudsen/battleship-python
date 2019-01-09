@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.1.1
+-----
+
+* Remove debug and change travis config
+
 1.1.0
 -----
 
