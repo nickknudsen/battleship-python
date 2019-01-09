@@ -133,7 +133,7 @@ class Board:
             if direction == 'v':
                 coordinates = pos, y
 
-            ship.add_location(*coordinates, False)
+            ship.add_location(*coordinates, hit=False)
             value = deepcopy(self.default_ship_value)
             value['ship'] = ship
             self.matrix[coordinates[0]][coordinates[1]] = value
@@ -158,7 +158,7 @@ class Board:
             if direction == 'v':
                 coordinates = pos, y
 
-            ship.add_location(*coordinates, False)
+            ship.add_location(*coordinates, hit=False)
             value = deepcopy(self.default_ship_value)
             value['ship'] = ship
             self.matrix[coordinates[0]][coordinates[1]] = value
