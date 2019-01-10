@@ -22,12 +22,12 @@ def print_statistics(game_board1, game_board2):
     print(dash)
     print(_('Points: '), game_board1.points, end="     ")
     print(_('Points: '), game_board1.points, end="     ")
-    print(_('Shots Available: '), game_board1.shots, end="     ")
+    print(_('Shots: '), game_board1.shots, end="     ")
     print(_('Time elapsed: '), '{} sec'.format(int(game_board1.time_elapsed)), end="")
 
     print('{:^30}'.format(''), end='')
     print(_('Points: '), game_board2.points, end="     ")
-    print(_('Shots Available: '), game_board2.shots, end="     ")
+    print(_('Shots: '), game_board2.shots, end="     ")
     print(_('Time elapsed: '), '{} sec'.format(int(game_board2.time_elapsed)), end="\n")
     print('{}{:^5}{}'.format(dash, '', dash))
 
@@ -126,7 +126,6 @@ def print_board(game_board1, game_board2, cpu_player=False):
 
 def print_ship_hit(ship_hit, player):
     click.clear()
-    # print_statistics(game_player)
     cprint('\n\n\n\n')
 
     if ship_hit.sunk:
@@ -163,7 +162,6 @@ def print_status(game_player, win=False):
     print(_('\nPoints: '), game_player.points, end="     ")
     print(_('Lost Shots: '), game_player.lost_shot, end="     ")
     print(_('Right Shots: '), game_player.right_shot, end="     ")
-    print(_('Shots Missing: '), game_player.shots, end="\n")
     cprint(dash)
 
     if win:

@@ -137,4 +137,4 @@ def play():
             printer.print_board(game_board1, game_board2)
 
     except (KeyboardInterrupt, AbortException):
-        sys.exit(printer.print_status(game_board1))
+        sys.exit(printer.print_status(game_board2))
