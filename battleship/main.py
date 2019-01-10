@@ -115,7 +115,7 @@ def play():
         while True:
             while True:
                 printer.print_board(game_board1, game_board2)
-                click.echo(st(_('Press CTRL+C to exit ...'), blink=True))
+                click.echo(st(_('Press CTRL+C to exit ...')))
 
                 # Player1 Move against Player2
                 if not player_shot(board_opponent=game_board2, player=1):
