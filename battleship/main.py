@@ -121,6 +121,10 @@ def play():
                 if not player_shot(board_opponent=game_board2, player=1):
                     break
 
+                # Check if Player1 Wins
+                if game_board2.is_finished:
+                    printer.print_status(game_board2, win=True)
+
                 printer.print_board(game_board1, game_board2)
 
                 # Player 2 shot
@@ -134,7 +138,12 @@ def play():
                 if not player_shot(board_opponent=game_board1, player=2, robot=robot):
                     break
 
+                # Check if Player2 Wins
+                if game_board1.is_finished:
+                    printer.print_status(game_board1, win=False)
+
             printer.print_board(game_board1, game_board2)
 
     except (KeyboardInterrupt, AbortException):
+        # TODO: Show statistics of the two player, for now is showing only for player1
         sys.exit(printer.print_status(game_board2))

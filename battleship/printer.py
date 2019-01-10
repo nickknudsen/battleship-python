@@ -44,7 +44,7 @@ def get_col_value(col):
         return st('{:^4}'.format('.'), fg='white')
 
 
-def print_board(game_board1, game_board2, cpu_player=False):
+def print_board(game_board1, game_board2):
     click.clear()
     print_statistics(game_board1, game_board2)
 
@@ -157,11 +157,11 @@ def print_error_message(message):
     input(_("Press Enter to continue..."))
 
 
-def print_status(game_player, win=False):
+def print_status(game_board, win=False):
     click.clear()
-    print(_('\nPoints: '), game_player.points, end="     ")
-    print(_('Lost Shots: '), game_player.lost_shot, end="     ")
-    print(_('Right Shots: '), game_player.right_shot, end="     ")
+    print(_('\nPoints: '), game_board.points, end="     ")
+    print(_('Lost Shots: '), game_board.lost_shot, end="     ")
+    print(_('Right Shots: '), game_board.right_shot, end="     ")
     cprint(dash)
 
     if win:
@@ -172,11 +172,11 @@ def print_status(game_player, win=False):
     cprint(message)
     cprint('\n\n\n')
     cprint(dash)
-    print(_('Sunken Ships: '), game_player.sunken_ships, end="     ")
-    print(_('Missing Ships: '), game_player.total_ships - game_player.sunken_ships, end="   ")
-    print(_('Time elapsed: {} sec').format(int(game_player.time_elapsed)), end="\n")
+    print(_('Sunken Ships: '), game_board.sunken_ships, end="     ")
+    print(_('Missing Ships: '), game_board.total_ships - game_board.sunken_ships, end="   ")
+    print(_('Time elapsed: {} sec').format(int(game_board.time_elapsed)), end="\n")
 
-    for i, ship in enumerate(game_player.ships):
+    for i, ship in enumerate(game_board.ships):
         data_board_ship = (
             _(ship.name.title()),
             ship.hits,

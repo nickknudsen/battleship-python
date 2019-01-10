@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.2.1
+-----
+
+* BugFix: Final and current shot Statistics
+
 1.2.0
 -----
 
