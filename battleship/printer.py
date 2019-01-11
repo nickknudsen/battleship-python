@@ -6,11 +6,19 @@ from click import echo as cprint, style as st
 
 from .constants import NUMBERS
 from .language import language
-
 _ = language.gettext
 
 table_length = 90
 dash = '-' * table_length
+
+SHIP_COLORS = {
+    'CA': 'green',
+    'BT': 'bright_white',
+    'CR': 'bright_yellow',
+    'DT': 'magenta',
+    'SB': 'cyan',
+    'FR': 'blue'
+}
 
 
 def print_statistics(game_board1, game_board2):
@@ -21,11 +29,10 @@ def print_statistics(game_board1, game_board2):
     print('{:^5}'.format(''), end='')
     print(dash)
     print(_('Points: '), game_board1.points, end="     ")
-    print(_('Points: '), game_board1.points, end="     ")
     print(_('Shots: '), game_board1.shots, end="     ")
     print(_('Time elapsed: '), '{} sec'.format(int(game_board1.time_elapsed)), end="")
 
-    print('{:^30}'.format(''), end='')
+    print('{:^43}'.format(''), end='')
     print(_('Points: '), game_board2.points, end="     ")
     print(_('Shots: '), game_board2.shots, end="     ")
     print(_('Time elapsed: '), '{} sec'.format(int(game_board2.time_elapsed)), end="\n")
@@ -40,7 +47,8 @@ def get_col_value(col):
             return st('{:^4}'.format(col['ship'].initials), fg='red')
     else:
         if col['visible'] and col['ship']:
-            return st('{:^4}'.format(col['ship'].initials), fg='green')
+            color = SHIP_COLORS[col['ship'].initials]
+            return st('{:^4}'.format(col['ship'].initials), fg=color)
         return st('{:^4}'.format('.'), fg='white')
 
 
@@ -85,16 +93,19 @@ def print_board(game_board1, game_board2):
     # Labels
     cprint(_('Labels'))
     for i, (board_ship, board2_ship) in enumerate(zip(game_board1.ships, game_board2.ships)):
+        ship_color = SHIP_COLORS[board_ship.initials]
+        ship_color2 = SHIP_COLORS[board2_ship.initials]
+
         data_board_ship = (
             _(board_ship.name.title()),
-            board_ship.initials,
+            st('{:^11}'.format(board_ship.initials), fg=ship_color),
             board_ship.length,
             board_ship.hits,
             _('yes') if board_ship.sunk else _('no')
         )
         data_board2_ship = (
             _(board2_ship.name.title()),
-            board2_ship.initials,
+            st('{:^11}'.format(board2_ship.initials), fg=ship_color2),
             board2_ship.length,
             board2_ship.hits,
             _('yes') if board2_ship.sunk else _('no')
@@ -110,13 +121,13 @@ def print_board(game_board1, game_board2):
             cprint(dash, nl=False)
             cprint('{:^5}'.format(''), nl=False)
             cprint(dash)
-            cprint('{:<13}{:^11}{:^8}{:^8}{:^10}'.format(*data_board_ship), nl=False)
+            cprint('{:<13}{}{:^8}{:^8}{:^10}'.format(*data_board_ship), nl=False)
             cprint('{:^45}'.format(''), nl=False)
-            cprint('{:<13}{:^11}{:^8}{:^8}{:^10}'.format(*data_board2_ship))
+            cprint('{:<13}{}{:^8}{:^8}{:^10}'.format(*data_board2_ship))
         else:
-            cprint('{:<13}{:^11}{:^8}{:^8}{:^10}'.format(*data_board_ship), nl=False)
+            cprint('{:<13}{}{:^8}{:^8}{:^10}'.format(*data_board_ship), nl=False)
             cprint('{:^45}'.format(''), nl=False)
-            cprint('{:<13}{:^11}{:^8}{:^8}{:^10}'.format(*data_board2_ship))
+            cprint('{:<13}{}{:^8}{:^8}{:^10}'.format(*data_board2_ship))
 
     cprint()
     cprint(dash, nl=False)

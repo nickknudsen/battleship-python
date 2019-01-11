@@ -93,7 +93,7 @@ class Board:
             'shooted': False,
             'visible': ships_visible,
         }
-        self.matrix = self.clear_board()
+        self.matrix = self.clean_board()
         self.sunken_ships = 0
         self.ships = []
         self.total_hits = 0
@@ -190,7 +190,7 @@ class Board:
             ship = Ship(**ship_type)
             self.add_ship_auto(ship)
 
-    def clear_board(self):
+    def clean_board(self):
         default_ship_value = deepcopy(self.default_ship_value)
         return [[default_ship_value for _ in range(self.COLS)] for _ in range(self.ROWS)]
 
@@ -246,6 +246,10 @@ class Game(Board):
         end_time = datetime.now()
         return (end_time - self.start_time).total_seconds()
 
+    def clean_board(self):
+        default_ship_value = deepcopy(self.default_ship_value)
+        return [[default_ship_value for _ in range(self.COLS)] for _ in range(self.ROWS)]
+
     def _get_coordinates_from_raw(self, raw_x, raw_y):
         try:
             x = int(LETTERS[raw_x.lower()])
@@ -283,29 +287,3 @@ class Game(Board):
 
     def __repr__(self):
         return "<Game: Player: {}>".format(self.__str__())
-
-
-class Brainiac:
-    """Decision Robot
-    TODO: Change when hit a Ship
-    """
-    def __init__(self, player_board):
-        self.player_board = player_board
-        self.selected = []
-        self.shoots = []
-
-    def get_random_shot(self):
-        x = random.choice(list(LETTERS.keys())[:17])
-        y = random.randint(0, Game.ROWS - 1)
-        if (x, y) in self.selected:
-            self.get_random_shot()
-
-        self.selected.append((x, y))
-        return x, y
-
-    def shot_status(self, x, y, hit):
-        self.shoots.append({
-            'x': x,
-            'y': y,
-            'hit': hit
-        })

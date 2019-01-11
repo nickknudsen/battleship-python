@@ -7,9 +7,10 @@ import click
 from click import style as st
 from click.exceptions import Abort as AbortException
 
-from .battleship import Game, Brainiac
+from .battleship import Game
 from .exceptions import InvalidCoordinate, InvalidFormat
 from .language import language
+from .robot import Brainiac
 from .version import __version__
 
 from . import printer
@@ -18,7 +19,7 @@ _ = language.gettext
 
 def player_shot(board_opponent, player, robot=None):
     if robot:
-        x, y = robot.get_random_shot()
+        x, y = robot.shot()
     else:
         result = click.prompt(_(
             'Choose your coordinate using one LETTER from A to Q and one NUMBER from 0 to '
@@ -36,11 +37,11 @@ def player_shot(board_opponent, player, robot=None):
 
     # passing the shot status to Robot learn
     if robot:
-        robot.shot_status(x, y, hit)
+        robot.shot_status(x, y, ship)
 
     if hit:
         printer.print_ship_hit(ship, player)
-        return False
+        return True
 
     # Check if Wins
     if board_opponent.is_finished():
