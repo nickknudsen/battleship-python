@@ -1,6 +1,13 @@
 Changelog
 ---------
 
+1.3.0
+-----
+
+* Improve UI,
+* BugFix: Robbot choice
+* Create Brainiac Class
+
 1.2.1
 -----
 
