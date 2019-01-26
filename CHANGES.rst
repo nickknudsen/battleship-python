@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.3.1
+-----
+
+* Bugfix: Add click lib as pinned
+
 1.3.0
 -----
 
