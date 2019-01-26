@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.3.2
+-----
+
+* Update Game Image
+
 1.3.1
 -----
 
