@@ -5,7 +5,7 @@ Battleship Python
 |PyPI latest| |PyPI Version| |PyPI License|  |CicleCI Status| |Coverage|
 
 
-This is a simple, but super cool Battleship game. Lets Play!!!
+This is a simple Framework of Battleship game. Lets Play!!!
 
 
 Installation
@@ -29,7 +29,17 @@ Add sudo in the beginning if you met problem.
 How to Use
 ----------
 
-To play use py-battleship or python -m battlefield
+To play use:
+
+.. code-block:: bash
+
+   $ py-battleship
+
+or
+
+.. code-block:: bash
+
+   $ python -m battlefield
 
 .. image:: https://raw.githubusercontent.com/rhenter/battleship-python/master/game.png
    :width: 600
